@@ -1,40 +1,47 @@
 /*
 
-Having a good previous year, Monk is back to teach algorithms and data structures. This year he welcomes the learners with a problem which he calls "Welcome Problem". The problem gives you two arrays 
-A and B (each array of size N ) and asks to print new array C such that:
-	C[i]=A[i]+B[i] ; 
-	1≤i≤N
-Now, Monk will proceed further when you solve this one. So, go on and solve it :)
+Monk just purchased an array A having N integers. Monk is very superstitious. He calls the array A Lucky if the frequency of the minimum element is odd, otherwise he considers it Unlucky. Help Monk in finding out if the array is Lucky or not.
 
 Input:
-First line consists of an integer N, denoting the size of A and B.
-Next line consists of N space separated integers denoting the array A.
-Next line consists of 
-N space separated integers denoting the array B.
+First line consists of a single integer T denoting the number of test cases.
+First line of each test case consists of a single integer N denoting the size of array A.
+Second line of each test case consists of N space separated integers denoting the array A.
+
+Output:
+For each test case, print "Lucky" (without quotes) if frequency of minimum element is odd, otherwise print "Unlucky"(without quotes). Print a new line after each test case.
+
 */
 
 function main(input) {
-    //Enter your code here
-    var K =  Number(input[0]);
-    var A1 = input[1].split(" ");
-    var A2 = input[2].split(" "); 
-    var sum = [];
-    var i = 0;
-    while(i < K){
-    	sum.push( Number(A1[i]) + Number(A2[i]));
-    	i++;
+    var inp = input.split("\n");
+    var test_cases = [],i = 0,j = 0,test_cases_K = Number(inp[0]);
+    while(i < test_cases_K){
+        var l = i * 2,j = 0,min_val = -1,min_count=0,result="";
+        var len = Number(inp[l+1]), data = inp[l+2].split(" ");
+        while(j < len){
+            var a = Number(data[j]);
+            min_val == -1 ? min_val = a : null;
+            if(a < min_val){
+                min_val = a;
+                min_count = 0;
+            }
+            min_val == a ? min_count+=1 : null;
+            j++;
+        }
+        (min_count % 2) == 0 ? process.stdout.write("Unlucky\n") : process.stdout.write("Lucky\n");
+        i++;
     }
-    process.stdout.write(sum.join(" "));
 }
 
 process.stdin.resume();
 process.stdin.setEncoding("utf-8");
-var stdin_input = [];
+var stdin_input = "";
 
 process.stdin.on("data", function (input) {
-	stdin_input.push(input.split("\n")[0]);
+    stdin_input += input;
 });
 
 process.stdin.on("end", function () {
    main(stdin_input);
 });
+
